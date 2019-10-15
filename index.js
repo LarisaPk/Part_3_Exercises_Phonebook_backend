@@ -5,11 +5,9 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const cors = require('cors')
 const Person = require('./models/person')
-
 app.use(express.static('build'))
 app.use(cors())
 app.use(bodyParser.json())
-
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :data'))
 // new token for morgan to log data in POST request
 morgan.token('data', (req, res) => JSON.stringify(req.body))
@@ -45,7 +43,6 @@ const generateId = (min, max) => {
 */
 
 app.post('/api/persons', (request, response, next) => {
-    
   const body = request.body
 // if name or number fields are empty MODIFIED
 /*
@@ -70,9 +67,7 @@ app.post('/api/persons', (request, response, next) => {
 app.put('/api/persons/:id', (request, response, next) => {
   const body = request.body
 
-  const person = {
-    number: body.number,
-  }
+  const person ={ number: body.number }
 
   Person.findByIdAndUpdate(request.params.id, person, { runValidators: true, context: 'query', new: true})
     .then(updatedPerson => {
@@ -82,8 +77,8 @@ app.put('/api/persons/:id', (request, response, next) => {
 })
 
 app.get('/api/persons', (req, res) => {
-  Person.find({}).then(persons =>{
-   res.json(persons.map(person=>person.toJSON())) 
+  Person.find({}).then(persons => {
+   res.json(persons.map(person => person.toJSON())) 
   })
   .catch(error => next(error))
 })
@@ -110,7 +105,7 @@ app.get('/info', (req, res) => {
 
 app.delete('/api/persons/:id', (request, response, next) => {
   Person.findByIdAndRemove(request.params.id)
-    .then(result => {
+    .then( result => {
       response.status(204).end()
     })
     .catch(error => next(error))
