@@ -1,1 +1,1 @@
-GET https://fast-lake-00388.herokuapp.com/info
+GET http://localhost:3001/info

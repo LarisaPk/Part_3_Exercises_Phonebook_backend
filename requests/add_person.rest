@@ -1,7 +1,7 @@
-post https://fast-lake-00388.herokuapp.com/api/persons
+post http://localhost:3001/api/persons
 Content-Type: application/json
 
 {   
-    "name": "Test22",
-    "number": 1234
+    "name": "teswwgggw",
+    "number": "123333456789"
 }
